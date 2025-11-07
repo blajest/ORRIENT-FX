@@ -1,0 +1,2545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ORIENTT FX">
+<link rel="apple-touch-icon" href="images/orientt-logo-192.png">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#055611">
+<meta name="msapplication-TileColor" content="#055611">
+
+<!-- Viewport for PWA -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ORIENTT FX - Premium Trading & Investment</title>
+    <link rel="icon" type="image/x-icon" href="images/orientt logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-green: #055611;
+            --accent-red: #DA0503;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #333333;
+        }
+
+        /* Enhanced Animated Green Background */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(5, 86, 17, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 86, 17, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(5, 86, 17, 0.05) 0%, transparent 50%);
+            animation: pulseBackground 20s ease infinite;
+        }
+
+        @keyframes pulseBackground {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.08; }
+        }
+
+        /* Enhanced Floating Shapes Animation */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(5, 86, 17, 0.05);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 70%;
+            animation-delay: -15s;
+        }
+
+        .shape:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 50%;
+            left: 40%;
+            animation-delay: -7s;
+        }
+
+        .shape:nth-child(6) {
+            width: 90px;
+            height: 90px;
+            top: 70%;
+            left: 60%;
+            animation-delay: -12s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.03;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 0.06;
+            }
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.03;
+            }
+            75% {
+                transform: translateY(-20px) rotate(270deg);
+                opacity: 0.06;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.03;
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img  img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo h2 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            transition: color 0.3s ease;
+        }
+        .logo h2 span {
+            color: var(--accent-red);
+            font-size: 1.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.5rem;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::before,
+        .nav-menu a.active::before {
+            width: 100%;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-green);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .close-menu {
+            display: none;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--primary-green);
+            cursor: pointer;
+            z-index: 1002;
+            transition: transform 0.3s ease;
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Scroll-triggered Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in.animated {
+            opacity: 1;
+        }
+
+        /* Enhanced Slide-up Animation */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .slide-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced Hero Section Height */
+        .hero {
+            background: linear-gradient(rgba(5, 86, 17, 0.8), rgba(5, 86, 17, 0.9)), url('https://images.unsplash.com/photo-1642790106117-e829e14a795f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4.3rem 0 3rem; /* Reduced height */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(5, 86, 17, 0.3) 100%);
+            animation: heroShimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes heroShimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tags span {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-tags span:hover {
+            transform: translateY(-3px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Enhanced Buttons */
+        .btn-primary {
+            background: var(--accent-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #b80402;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(218, 5, 3, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border: 2px solid var(--white);
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-secondary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+        }
+
+        .btn-telegram {
+            background: #DA0503;
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.4s ease;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-telegram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-telegram:hover::before {
+            left: 100%;
+        }
+
+        .btn-telegram:hover {
+            background: #b80402;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,136,204,0.3);
+        }
+
+        /* Enhanced Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-red);
+            transition: width 0.4s ease;
+        }
+
+        .section-header:hover h2::after {
+            width: 120px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 86, 17, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--accent-red);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--accent-red);
+        }
+
+        /* Enhanced Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-green);
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover .testimonial-avatar {
+            border-color: var(--accent-red);
+            transform: scale(1.1);
+        }
+
+        .testimonial-info h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-info p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .testimonial-rating {
+            color: #ffc107;
+            margin-top: 1rem;
+        }
+
+        /* Enhanced Payment Methods */
+        .payment-methods {
+            padding: 3rem 0;
+            background: var(--white);
+        }
+
+        .payment-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .payment-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.5s ease;
+            width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 86, 17, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .payment-card:hover::before {
+            left: 100%;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .payment-card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .payment-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--accent-red);
+        }
+
+        /* Enhanced Investment Plans */
+        .investment-plans {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .plan-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.5s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .plan-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .duration {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card:hover .duration {
+            background: var(--accent-red);
+            transform: scale(1.05);
+        }
+
+        .min-deposit {
+            font-size: 1.2rem;
+            color: var(--accent-red);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .investment-options {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .investment-options li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .investment-options li:hover {
+            transform: translateX(5px);
+            color: var(--primary-green);
+        }
+
+        .investment-options li:before {
+            content: "✓";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .btn-invest {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-invest::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-invest:hover::before {
+            left: 100%;
+        }
+
+        .btn-invest:hover {
+            background: #055611;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px #055611;
+        }
+
+        /* Enhanced VIP and Masterclass Cards */
+        .plan-card.vip,
+        .plan-card.masterclass {
+            position: relative;
+        }
+
+        .plan-card.vip.popular,
+        .plan-card.masterclass.popular {
+            border-color: var(--accent-red);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-red);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .benefits,
+        .curriculum {
+            list-style: none;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .benefits li,
+        .curriculum li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefits li:hover,
+        .curriculum li:hover {
+            transform: translateX(5px);
+            color: var(--primary-green);
+        }
+
+        .benefits li:before,
+        .curriculum li:before {
+            content: "✓";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .btn-vip,
+        .btn-masterclass {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-vip::before,
+        .btn-masterclass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-vip:hover::before,
+        .btn-masterclass:hover::before {
+            left: 100%;
+        }
+
+        .btn-vip:hover,
+        .btn-masterclass:hover {
+            background: #04420d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(5, 86, 17, 0.3);
+        }
+
+        /* Enhanced Masterclass Specific Styles */
+        .masterclass-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        /* Enhanced About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Process Section */
+        .process {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .step:hover .step-number {
+            background: var(--accent-red);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Enhanced Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover i {
+            color: var(--accent-red);
+            transform: scale(1.2);
+        }
+
+        .contact-form {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+
+        .contact-form:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(5, 86, 17, 0.2);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Enhanced Success Message */
+        .success-message {
+            display: none;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 1rem;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-close {
+            background: white;
+            color: #055611;
+            padding: 0.8rem 1.5rem;
+            border: #055611;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: #055611;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 2rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-section:first-child h3 {
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-red);
+            width: 40%;
+        }
+
+        .footer-contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-contact-item i {
+            margin-top: 0.2rem;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-item:hover i {
+            color: var(--accent-red);
+            transform: scale(1.2);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-red);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .close-menu {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 70%;
+                height: 100vh;
+                text-align: left;
+                transition: left 0.4s ease;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.1);
+                padding: 4rem 1.5rem 1.5rem;
+                z-index: 999;
+                gap: 0.2rem;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 0.1rem 0;
+            }
+
+            .nav-menu a {
+                padding: 0.6rem 0.8rem;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                font-size: 1rem;
+                border-radius: 4px;
+                color: var(--dark-gray);
+                font-weight: 500;
+                text-decoration: none;
+            }
+
+            /* Added icons to mobile menu with white hover color */
+            .nav-menu a i {
+                display: inline-block;
+                width: 20px;
+                text-align: center;
+                font-size: 1.1rem;
+                color: var(--primary-green);
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu a:hover i,
+            .nav-menu a.active i {
+                color: var(--white);
+                transform: scale(1.2);
+            }
+
+            .nav-menu a:hover,
+            .nav-menu a.active {
+                background: var(--primary-green);
+                color: var(--white);
+                transform: translateX(5px);
+            }
+
+            /* Added company logo and name to mobile menu */
+            .mobile-logo {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-logo-img {
+                width: 40px;
+                height: 40px;
+                background: var(--primary-green);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                font-size: 0.9rem;
+            }
+
+            .mobile-logo h3 {
+                color: var(--primary-green);
+                font-size: 1.3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .page-section {
+                padding-top: 70px;
+                min-height: auto;
+                padding-bottom: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .plan-card.vip.popular,
+            .plan-card.masterclass.popular {
+                transform: scale(1);
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            .payment-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .masterclass-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .plans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .masterclass-plans {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .plans-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .masterclass-plans {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                margin: 0 auto;
+            }
+        }
+        /* Enhanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn-close {
+            background: white;
+            color: #055611;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #055611;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-close:hover {
+            background: #055611;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* New Modal Styles for Plan Details */
+        .plan-details {
+            text-align: left;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 5px;
+        }
+
+        .plan-title {
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-weight: bold;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-duration {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .plan-benefits {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .plan-benefits li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .plan-benefits li:before {
+            content: "✓";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 1px;
+            background: #ddd;
+            margin: 1.5rem 0;
+        }
+
+        /* Responsive adjustments for modal */
+        @media (max-width: 768px) {
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-img"><img src="images/orientt logo.jpg" alt="ORIENTT FX Logo"></div>
+                <h2>ORIENTT <span>FX</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <div class="close-menu">×</div>
+                <!-- Added company logo and name to mobile menu -->
+                
+                <!-- Added icons to mobile menu items only -->
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#plans" class="nav-link" data-page="plans">Investment Plans</a></li>
+                <li><a href="#vip" class="nav-link" data-page="vip">VIP Plan</a></li>
+                <li><a href="#masterclass" class="nav-link" data-page="masterclass">Masterclass</a></li>
+                <li><a href="#contact" class="nav-link" data-page="contact">Contact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content animate-on-scroll slide-up">
+                    <h1>GROW YOUR PORTFOLIO, PRECISION TRADING. PREMIUM RESULTS.</h1>
+                    <p>Your Trusted Trading & Fund Management Partner</p>
+                    <div class="hero-tags">
+                        <span>XAUUSD</span>
+                        <span>BTCUSD</span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#plans" class="btn-primary nav-link" data-page="plans">Start Investing</a>
+                        <a href="https://t.me/NaseerHyde" class="btn-secondary" target="_blank">
+                            <i class="fab fa-telegram"></i> Contact Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header animate-on-scroll slide-up">
+                    <h2>Why Choose ORIENTT FX?</h2>
+                    <p>We provide premium trading and investment services with proven results</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll fade-in">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Investments</h3>
+                        <p>Your funds are protected with advanced security measures and transparent processes.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll fade-in">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Expert Trading</h3>
+                        <p>Professional traders managing your investments in XAUUSD and BTCUSD markets.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll fade-in">
+                        <i class="fas fa-clock"></i>
+                        <h3>Fast Returns</h3>
+                        <p>Quick profit cycles with 24-hour, 48-hour, and 5-day investment plans.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll fade-in">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Direct Telegram support for all your queries and investment needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header animate-on-scroll slide-up">
+                    <h2>What Our Clients Say</h2>
+                    <p>Real testimonials from our satisfied investors</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-on-scroll fade-in">
+                        <div class="testimonial-header">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Michael Chen" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>Michael Chen</h4>
+                                <p>Beginner Plan Investor</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            "I started with just $500 and within 24 hours, I received $4,000! The process was smooth and the support team was very helpful. Highly recommended for beginners!"
+                        </div>
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll fade-in">
+                        <div class="testimonial-header">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="James Wilson" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>James Wilson</h4>
+                                <p>Executive Plan Investor</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            "The Executive Plan exceeded my expectations. My $5,000 investment turned into $40,000 in just 48 hours. ORIENTT FX delivers on their promises!"
+                        </div>
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll fade-in">
+                        <div class="testimonial-header">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="David Rodriguez" class="testimonial-avatar">
+                            <div class="testimonial-info">
+                                <h4>David Rodriguez</h4>
+                                <p>Premium Plan Investor</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            "As a premium investor, I've seen consistent returns. The $15,000 I invested returned $120,000 in 5 days. This is by far the best investment platform I've used."
+                        </div>
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll slide-up">
+                <h2>About ORIENTT FX</h2>
+                <p>Your trusted partner in premium trading and investment solutions</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll slide-up">
+                    <h2>Who We Are</h2>
+                    <p>ORIENTT FX is a premier trading and investment platform specializing in precision trading across major financial markets. With a focus on XAUUSD and BTCUSD, we deliver premium results for our investors through expert fund management and strategic market analysis.</p>
+                    
+                    <p>Our team of experienced traders utilizes advanced algorithms and market insights to maximize returns while minimizing risks. We believe in transparency, security, and building long-term relationships with our clients.</p>
+
+                    <p>Join The Emperor's Circle and experience the difference that professional trading can make to your investment portfolio.</p>
+
+                    <h3>Our Mission</h3>
+                    <p>To democratize access to premium trading strategies and provide consistent, high-yield investment opportunities for both novice and experienced investors.</p>
+
+                    <h3>Our Values</h3>
+                    <ul class="benefits">
+                        <li>Transparency in all operations</li>
+                        <li>Security of client funds</li>
+                        <li>Consistent performance</li>
+                        <li>Client education and support</li>
+                    </ul>
+                </div>
+                <div class="about-image animate-on-scroll fade-in">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Financial Analysis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Plans -->
+    <section id="plans" class="page-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll slide-up">
+                <h2>Investment Plans</h2>
+                <p>Choose from our carefully designed investment packages with guaranteed returns</p>
+            </div>
+            <div class="plans-grid">
+                <!-- Beginner Plan -->
+                <div class="plan-card animate-on-scroll fade-in">
+                    <h3>BEGINNER PLAN</h3>
+                    <div class="duration">24 Hours</div>
+                    <div class="min-deposit">Minimum Deposit: $500</div>
+                    <ul class="investment-options">
+                        <li>Invest $500 earn $4,000</li>
+                        <li>Invest $600 earn $4,800</li>
+                        <li>Invest $800 earn $6,400</li>
+                        <li>Invest $1000 earn $8,000</li>
+                    </ul>
+                    <p><strong>700% Return on Investment</strong></p>
+                    <button class="btn-invest" data-plan="Beginner Plan" data-duration="24 Hours" data-price="$500">Select This Plan</button>
+                </div>
+
+                <!-- Executive Plan -->
+                <div class="plan-card animate-on-scroll fade-in">
+                    <h3>EXECUTIVE PLAN</h3>
+                    <div class="duration">48 Hours</div>
+                    <div class="min-deposit">Minimum Deposit: $2,000</div>
+                    <ul class="investment-options">
+                        <li>Invest $2,000 earn $16,000</li>
+                        <li>Invest $3,000 earn $24,000</li>
+                        <li>Invest $4,000 earn $32,000</li>
+                        <li>Invest $5,000 earn $40,000</li>
+                    </ul>
+                    <p><strong>700% Return on Investment</strong></p>
+                    <button class="btn-invest" data-plan="Executive Plan" data-duration="48 Hours" data-price="$2,000">Select This Plan</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="plan-card animate-on-scroll fade-in">
+                    <h3>PREMIUM PLAN</h3>
+                    <div class="duration">5 Days</div>
+                    <div class="min-deposit">Minimum Deposit: $6,000</div>
+                    <ul class="investment-options">
+                        <li>Invest $6,000 earn $48,000</li>
+                        <li>Invest $8,000 earn $64,000</li>
+                        <li>Invest $10,000 earn $80,000</li>
+                        <li>Invest $15,000 earn $120,000</li>
+                    </ul>
+                    <p><strong>700% Return on Investment</strong></p>
+                    <button class="btn-invest" data-plan="Premium Plan" data-duration="5 Days" data-price="$6,000">Select This Plan</button>
+                </div>
+            </div>
+
+            <!-- Payment Methods Section -->
+            <div class="payment-methods">
+                <div class="section-header animate-on-scroll slide-up">
+                    <h2>Accepted Payment Methods</h2>
+                    <p>We accept Bitcoin and USDT for your convenience</p>
+                </div>
+                <div class="payment-grid">
+                    <div class="payment-card animate-on-scroll fade-in">
+                        <i class="fab fa-bitcoin"></i>
+                        <h3>Bitcoin (BTC)</h3>
+                        <p>Secure and fast Bitcoin payments</p>
+                    </div>
+                    <div class="payment-card animate-on-scroll fade-in">
+                        <i class="fas fa-coins"></i>
+                        <h3>USDT</h3>
+                        <p>Stablecoin payments with minimal fees</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Plan -->
+    <section id="vip" class="page-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll slide-up">
+                <h2>VIP Trading Plan</h2>
+                <p>Exclusive signals and premium market insights for serious traders</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card vip animate-on-scroll fade-in">
+                    <h3>MONTHLY VIP</h3>
+                    <div class="price">$150</div>
+                    <div class="duration">1 Month Access</div>
+                    <ul class="benefits">
+                        <li>Daily Premium Signals</li>
+                        <li>Market Analysis</li>
+                        <li>Risk Management Tips</li>
+                        <li>24/7 Support</li>
+                        <li>Entry/Exit Points</li>
+                    </ul>
+                    <p><strong>Perfect for traders who want to test our premium signals</strong></p>
+                    <button class="btn-vip" data-plan="Monthly VIP" data-price="$150" data-duration="1 Month">Subscribe Now</button>
+                </div>
+                <div class="plan-card vip popular animate-on-scroll fade-in">
+                    <div class="popular-badge">RECOMMENDED</div>
+                    <h3>QUARTERLY VIP</h3>
+                    <div class="price">$450</div>
+                    <div class="duration">3 Months Access</div>
+                    <ul class="benefits">
+                        <li>All Monthly Features</li>
+                        <li>Weekly Market Webinars</li>
+                        <li>Priority Support</li>
+                        <li>Custom Strategy Sessions</li>
+                        <li>Advanced Risk Management</li>
+                    </ul>
+                    <p><strong>Best value - save $50 compared to monthly</strong></p>
+                    <button class="btn-vip" data-plan="Quarterly VIP" data-price="$450" data-duration="3 Months">Subscribe Now</button>
+                </div>
+                <div class="plan-card vip animate-on-scroll fade-in">
+                    <h3>LIFETIME VIP</h3>
+                    <div class="price">$1,000</div>
+                    <div class="duration">Lifetime Access</div>
+                    <ul class="benefits">
+                        <li>All Quarterly Features</li>
+                        <li>Lifetime Signal Access</li>
+                        <li>Personal Mentor</li>
+                        <li>Custom Indicators</li>
+                        <li>Private Group Access</li>
+                    </ul>
+                    <p><strong>One-time payment for lifetime access to all VIP features</strong></p>
+                    <button class="btn-vip" data-plan="Lifetime VIP" data-price="$1,000" data-duration="Lifetime">Subscribe Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masterclass -->
+    <section id="masterclass" class="page-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll slide-up">
+                <h2>Trading Masterclass</h2>
+                <p>Learn professional trading strategies from market experts</p>
+            </div>
+            <div class="masterclass-plans">
+                <div class="plan-card masterclass animate-on-scroll fade-in">
+                    <h3>2-MONTH MASTERCLASS</h3>
+                    <div class="price">$300</div>
+                    <div class="duration">2 Months Training</div>
+                    <ul class="curriculum">
+                        <li>Basic to Advanced Trading</li>
+                        <li>Technical Analysis</li>
+                        <li>Risk Management</li>
+                        <li>Live Trading Sessions</li>
+                        <li>Weekly Q&A</li>
+                        <li>Trading Psychology</li>
+                    </ul>
+                    <p><strong>Comprehensive trading education for beginners to intermediate traders</strong></p>
+                    <button class="btn-masterclass" data-plan="2-Month Masterclass" data-price="$300" data-duration="2 Months">Enroll Now</button>
+                </div>
+                <div class="plan-card masterclass popular animate-on-scroll fade-in">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <h3>3-MONTH MASTERCLASS</h3>
+                    <div class="price">$500</div>
+                    <div class="duration">3 Months Intensive Training</div>
+                    <ul class="curriculum">
+                        <li>All 2-Month Features</li>
+                        <li>Advanced Strategies</li>
+                        <li>Custom Indicators</li>
+                        <li>1-on-1 Mentoring</li>
+                        <li>Portfolio Management</li>
+                        <li>Lifetime Community Access</li>
+                    </ul>
+                    <p><strong>Most comprehensive package with personalized mentoring</strong></p>
+                    <button class="btn-masterclass" data-plan="3-Month Masterclass" data-price="$500" data-duration="3 Months">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll slide-up">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any inquiries</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info animate-on-scroll slide-up">
+                    <h2>Get In Touch</h2>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>641 Lexington Avenue, New York City, NY</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:orienttfxcapital@yahoo.com" style="color: var(--primary-green);">orienttfxcapital@yahoo.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <div>
+                            <h3>Telegram</h3>
+                            <p><a href="https://t.me/NaseerHyde" target="_blank" style="color: var(--primary-green);">@NaseerHyde</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form animate-on-scroll fade-in">
+                    <h2>Send us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> Thank you for your message! We'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Contact Admin on Telegram</h3>
+            
+            <div class="plan-details">
+                <div class="plan-title" id="modalPlanTitle">VIP Plan - 3 Months</div>
+                <div class="plan-price" id="modalPlanPrice">Price: $450</div>
+                <div class="plan-duration" id="modalPlanDuration">Duration: 90 Days</div>
+                
+                <div class="divider"></div>
+                
+                <div style="font-weight: bold; margin-bottom: 0.5rem;">Benefits:</div>
+                <ul class="plan-benefits" id="modalPlanBenefits">
+                    <li>Daily Trading Signals</li>
+                    <li>Market Analysis & Insights</li>
+                    <li>Risk Management Strategies</li>
+                    <li>Priority Support</li>
+                    <li>Exclusive Community Access</li>
+                </ul>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="btn-close" id="closeModal">Close</button>
+                <a href="#" class="btn-telegram" target="_blank" id="contactAdmin">
+                    <i class="fab fa-telegram"></i> Message on Telegram
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ORIENTT FX</h3>
+                    <p>Your Trusted Trading & Fund Management Partner. We specialize in precision trading with focus on XAUUSD and BTCUSD markets, delivering premium results through expert fund management.</p>
+                    <div class="social-icons">
+                        <a href="https://t.me/NaseerHyde" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:orienttfxcapital@yahoo.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home" class="nav-link" data-page="home">Home</a>
+                    <a href="#about" class="nav-link" data-page="about">About Us</a>
+                    <a href="#plans" class="nav-link" data-page="plans">Investment Plans</a>
+                    <a href="#vip" class="nav-link" data-page="vip">VIP Plan</a>
+                    <a href="#masterclass" class="nav-link" data-page="masterclass">Masterclass</a>
+                    <a href="#contact" class="nav-link" data-page="contact">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>641 Lexington Avenue, NYC</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fab fa-telegram"></i>
+                            <span><a href="https://t.me/NaseerHyde" target="_blank" style="color: #ccc;">Telegram: @NaseerHyde</a></span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:orienttfxcapital@yahoo.com" style="color: #ccc;">orienttfxcapital@yahoo.com</a></span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem;">Payment Methods: USDT, BTC</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ORIENTT FX. All rights reserved. | Precision Trading. Premium Results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSections = document.querySelectorAll('.page-section');
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const closeMenu = document.querySelector('.close-menu');
+            const modal = document.getElementById('confirmationModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalPlanTitle = document.getElementById('modalPlanTitle');
+            const modalPlanPrice = document.getElementById('modalPlanPrice');
+            const modalPlanDuration = document.getElementById('modalPlanDuration');
+            const modalPlanBenefits = document.getElementById('modalPlanBenefits');
+            const contactAdmin = document.getElementById('contactAdmin');
+            const successMessage = document.getElementById('successMessage');
+            const navbar = document.querySelector('.navbar');
+            
+            // Show home page by default
+            showPage('home');
+            
+            // Navigation click handlers
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        showPage(page);
+                        
+                        // Update active nav link
+                        navLinks.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close mobile menu if open
+                        if (navMenu.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            navMenu.classList.remove('active');
+                        }
+                        
+                        // Scroll to top of the page
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu button
+            closeMenu.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+            
+            // Show specific page function
+            function showPage(pageId) {
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(pageId).classList.add('active');
+                
+                // Trigger animations for the new page
+                setTimeout(() => {
+                    animateOnScroll();
+                }, 100);
+            }
+            
+            // Scroll animation function
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.animate-on-scroll, .fade-in, .slide-up');
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('animated');
+                    }
+                });
+            }
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                animateOnScroll();
+            });
+            
+            // Initial animation on load
+            animateOnScroll();
+            
+            // Investment plan buttons - Updated modal content
+            const investButtons = document.querySelectorAll('.btn-invest, .btn-vip, .btn-masterclass');
+            investButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.getAttribute('data-plan');
+                    const duration = this.getAttribute('data-duration');
+                    const price = this.getAttribute('data-price');
+                    
+                    // Update modal content based on the selected plan
+                    updateModalContent(plan, duration, price);
+                    
+                    // Set up Telegram message with the exact format requested
+                    const telegramMessage = `Hello! I'm interested in the ${plan} from ORIENTT FX. Please provide me with more details on how to proceed.`;
+                    const telegramUrl = `https://t.me/NaseerHyde?text=${encodeURIComponent(telegramMessage)}`;
+                    
+                    // Update the contact admin link
+                    contactAdmin.href = telegramUrl;
+                    
+                    modal.classList.add('active');
+                });
+            });
+            
+            // Function to update modal content based on selected plan
+            function updateModalContent(plan, duration, price) {
+                // Set basic plan info
+                modalPlanTitle.textContent = plan;
+                modalPlanPrice.textContent = `Price: ${price || 'Contact for pricing'}`;
+                modalPlanDuration.textContent = `Duration: ${duration || 'Varies by plan'}`;
+                
+                // Clear existing benefits
+                modalPlanBenefits.innerHTML = '';
+                
+                // Add benefits based on plan type
+                if (plan.includes('VIP')) {
+                    if (plan.includes('Monthly')) {
+                        addBenefits(modalPlanBenefits, [
+                            'Daily Premium Signals',
+                            'Market Analysis',
+                            'Risk Management Tips',
+                            '24/7 Support',
+                            'Entry/Exit Points'
+                        ]);
+                    } else if (plan.includes('Quarterly')) {
+                        addBenefits(modalPlanBenefits, [
+                            'All Monthly Features',
+                            'Weekly Market Webinars',
+                            'Priority Support',
+                            'Custom Strategy Sessions',
+                            'Advanced Risk Management'
+                        ]);
+                    } else if (plan.includes('Lifetime')) {
+                        addBenefits(modalPlanBenefits, [
+                            'All Quarterly Features',
+                            'Lifetime Signal Access',
+                            'Personal Mentor',
+                            'Custom Indicators',
+                            'Private Group Access'
+                        ]);
+                    }
+                } else if (plan.includes('Masterclass')) {
+                    if (plan.includes('2-Month')) {
+                        addBenefits(modalPlanBenefits, [
+                            'Basic to Advanced Trading',
+                            'Technical Analysis',
+                            'Risk Management',
+                            'Live Trading Sessions',
+                            'Weekly Q&A',
+                            'Trading Psychology'
+                        ]);
+                    } else if (plan.includes('3-Month')) {
+                        addBenefits(modalPlanBenefits, [
+                            'All 2-Month Features',
+                            'Advanced Strategies',
+                            'Custom Indicators',
+                            '1-on-1 Mentoring',
+                            'Portfolio Management',
+                            'Lifetime Community Access'
+                        ]);
+                    }
+                } else {
+                    // For investment plans
+                    addBenefits(modalPlanBenefits, [
+                        'Professional Fund Management',
+                        'Secure Investment Process',
+                        'Guaranteed Returns',
+                        '24/7 Support',
+                        'Transparent Operations'
+                    ]);
+                }
+            }
+            
+            // Helper function to add benefits to the modal
+            function addBenefits(container, benefits) {
+                benefits.forEach(benefit => {
+                    const li = document.createElement('li');
+                    li.textContent = benefit;
+                    container.appendChild(li);
+                });
+            }
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+            
+            // Enhanced Contact form handler
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Set timeout to redirect to email app after 3 seconds
+                    setTimeout(function() {
+                        // Create mailto link with form data
+                        const mailtoLink = `mailto:orienttfxcapital@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                        
+                        // Open email client
+                        window.location.href = mailtoLink;
+                    }, 3000);
+                });
+            }
+        });
+        // PWA Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      })
+      .catch(function(error) {
+        console.log('ServiceWorker registration failed: ', error);
+      });
+  });
+}
+
+// PWA Install Prompt
+let deferredPrompt;
+const installButton = document.createElement('button');
+
+// Create and style install button
+installButton.innerHTML = '📱 Install App';
+installButton.style.cssText = `
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #055611;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(5, 86, 17, 0.3);
+  z-index: 10000;
+  transition: all 0.3s ease;
+  font-size: 14px;
+`;
+installButton.addEventListener('mouseover', () => {
+  installButton.style.transform = 'translateY(-2px)';
+  installButton.style.boxShadow = '0 6px 16px rgba(5, 86, 17, 0.4)';
+});
+installButton.addEventListener('mouseout', () => {
+  installButton.style.transform = 'translateY(0)';
+  installButton.style.boxShadow = '0 4px 12px rgba(5, 86, 17, 0.3)';
+});
+
+// Show install button when app can be installed
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show install button
+  document.body.appendChild(installButton);
+  
+  installButton.addEventListener('click', () => {
+    installButton.style.display = 'none';
+    deferredPrompt.prompt();
+    
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+
+// Hide install button when app is successfully installed
+window.addEventListener('appinstalled', () => {
+  console.log('PWA was installed');
+  if (installButton.parentNode) {
+    installButton.parentNode.removeChild(installButton);
+  }
+  deferredPrompt = null;
+});
+
+// Check if app is already installed
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  console.log('App is running in standalone mode');
+}
+// Add this to your existing JavaScript
+function showInstallPromotion() {
+  const installPromotion = document.createElement('div');
+  installPromotion.innerHTML = `
+    <div style="
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      z-index: 10000;
+      max-width: 300px;
+      border-left: 4px solid #055611;
+    ">
+      <h4 style="margin: 0 0 8px 0; color: #055611;">Install ORIENTT FX App</h4>
+      <p style="margin: 0 0 12px 0; font-size: 14px; color: #333;">
+        Get the full app experience with easy access
+      </p>
+      <button id="installAppBtn" style="
+        background: #055611;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      ">Install Now</button>
+      <button id="closeInstallBtn" style="
+        background: transparent;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 14px;
+      ">Not Now</button>
+    </div>
+  `;
+  
+  document.body.appendChild(installPromotion);
+  
+  document.getElementById('installAppBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          installPromotion.remove();
+        }
+      });
+    }
+  });
+  
+  document.getElementById('closeInstallBtn').addEventListener('click', () => {
+    installPromotion.remove();
+  });
+}
+
+// Call this function when you want to show the install promotion
+// For example, after user spends some time on the site
+setTimeout(() => {
+  if (deferredPrompt) {
+    showInstallPromotion();
+  }
+}, 10000);
+    </script>
+</body>
+</html>

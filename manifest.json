@@ -1,0 +1,41 @@
+{
+  "name": "ORIENTT FX - Trading & Investment",
+  "short_name": "ORIENTT FX",
+  "description": "Premium Trading & Investment Platform - Grow Your Portfolio with Precision Trading",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#055611",
+  "theme_color": "#055611",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["finance", "business", "investment"],
+  "icons": [
+    {
+      "src": "images/orientt-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/orientt-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "images/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
